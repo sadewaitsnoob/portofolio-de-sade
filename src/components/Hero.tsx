@@ -9,13 +9,17 @@ export default function Hero() {
         <Marquee text="CREATIVE • FRONTEND • BACKEND •" reverse />
       </div>
 
-      {/* Konten Utama di Depan */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4">
-        <h1 className="text-7xl font-geist font-black uppercase tracking-tighter text-zinc-950 sm:text-9xl lg:text-[10rem] xl:text-[12rem] mt-12">
+      {/* Foto Placeholder + SADEWA — teks menimpa bagian bawah placeholder */}
+      <div className="relative z-10 flex flex-col items-center px-4">
+        <div className="w-48 sm:w-56 md:w-64 aspect-[3/4] rounded-lg bg-zinc-200 flex items-center justify-center">
+          <span className="text-sm font-medium text-zinc-500 tracking-wide">
+            Photo here
+          </span>
+        </div>
+
+        <h1 className="relative z-20 -mt-6 sm:-mt-8 md:-mt-10 text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-geist font-black uppercase tracking-tighter text-zinc-950 text-center leading-none">
           SADEWA
         </h1>
-        
-
       </div>
     </section>
   );
