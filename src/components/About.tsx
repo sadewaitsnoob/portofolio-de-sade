@@ -3,29 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 
-const techStack = [
-  {
-    category: "Frontend",
-    tools: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "Bootstrap", "Tailwind CSS", "Vite"],
-  },
-  {
-    category: "Backend",
-    tools: ["Node.js", "Express.js", "Laravel", "PHP", "Socket.io"],
-  },
-  {
-    category: "Database",
-    tools: ["MySQL", "MariaDB"],
-  },
-  {
-    category: "Cloud & Deployment",
-    tools: ["Supabase", "Firebase", "Vercel", "Netlify"],
-  },
-  {
-    category: "Design",
-    tools: ["Figma", "Framer", "Canva"],
-  },
-];
-
 const containerVariants: Variants = {
   hidden: {},
   visible: {
@@ -89,42 +66,10 @@ export default function About() {
               className="text-base leading-relaxed text-zinc-500 md:text-lg"
             >
               I&apos;m currently actively learning to grow my skills in{" "}
-              <span className="text-zinc-950 font-semibold">frontend and backend development</span>,
+              <span className="text-zinc-950 font-semibold">frontend development</span>,
               while continuously refining my design intuition to create meaningful work.
             </motion.p>
           </div>
-
-          {/* Tech Stack */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-10">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-zinc-400">
-              Tech Stack
-            </h3>
-
-            <div className="flex flex-col gap-8 divide-y divide-zinc-100">
-              {techStack.map((group, i) => (
-                <div key={i} className="flex flex-col sm:flex-row gap-4 pt-8 first:pt-0">
-                  {/* Label Kategori */}
-                  <div className="w-full sm:w-44 shrink-0">
-                    <span className="text-sm font-semibold text-zinc-950 tracking-tight">
-                      {group.category}
-                    </span>
-                  </div>
-
-                  {/* Daftar Tech */}
-                  <div className="flex flex-wrap gap-2">
-                    {group.tools.map((tool, j) => (
-                      <span
-                        key={j}
-                        className="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full border border-zinc-200 text-zinc-700 bg-zinc-50 hover:bg-zinc-950 hover:text-white hover:border-zinc-950 transition-all duration-200"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
