@@ -66,7 +66,7 @@ export default function About() {
               className="text-base leading-relaxed text-zinc-500 md:text-lg"
             >
               I&apos;m currently actively learning to grow my skills in{" "}
-              <span className="text-zinc-950 font-semibold">frontend development</span>,
+              <span className="text-zinc-950 font-semibold">backend development</span>,
               while continuously refining my design intuition to create meaningful work.
             </motion.p>
           </div>

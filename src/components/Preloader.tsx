@@ -32,7 +32,7 @@ export default function Preloader() {
           initial={{ opacity: 1, y: 0 }}
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-white text-zinc-950"
+          className="fixed inset-0 z-999 flex flex-col items-center justify-center bg-white text-zinc-950"
         >
           <div className="text-5xl md:text-7xl font-bold tracking-tighter flex items-baseline">
             <motion.span>{rounded}</motion.span>
