@@ -77,16 +77,10 @@ export default function Header() {
             </nav>
 
             {/* Bottom Meta in Mobile Menu */}
-            <div className="flex flex-col gap-4 border-t border-zinc-800 pt-6">
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                </span>
-                <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                  Open to work
-                </span>
-              </div>
+            <div className="flex flex-col gap-2 border-t border-zinc-800 pt-6">
+              <span className="text-xs font-semibold uppercase tracking-widest text-zinc-500">
+                Email
+              </span>
               <a
                 href="mailto:saddewaaa1509@gmail.com"
                 className="text-sm font-semibold text-zinc-300 break-all"

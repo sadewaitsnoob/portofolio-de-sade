@@ -152,31 +152,17 @@ export default function Contact() {
           {/* Left: Social links */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center gap-4 sm:gap-6"
+            className="flex flex-wrap items-center gap-6 sm:gap-8"
           >
-            <SocialLink href="https://github.com/" label="GitHub" />
-            <SocialLink href="https://linkedin.com/" label="LinkedIn" />
+            <SocialLink href="https://github.com/sadewaitsnoob" label="GitHub" />
             <SocialLink href="https://instagram.com/" label="Instagram" />
-            <SocialLink href="https://behance.net/" label="Behance" />
           </motion.div>
 
-          {/* Right: "Open to work" pulsing dot + copyright */}
+          {/* Right: Copyright */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center justify-between gap-6 sm:justify-end"
+            className="flex items-center sm:justify-end"
           >
-            {/* Pulsing "Open to work" — exact Russell Numo detail */}
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-widest text-zinc-500">
-                Open to work
-              </span>
-            </div>
-
-            {/* Copyright */}
             <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
               © {new Date().getFullYear()} Sadewa
             </span>
