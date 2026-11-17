@@ -17,6 +17,7 @@ export default function Hero() {
             src="/photo_fixed.JPG"
             alt="Sadewa"
             fill
+            sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, 256px"
             className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
             priority
           />
