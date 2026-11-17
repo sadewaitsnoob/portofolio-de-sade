@@ -1,23 +1,23 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 
 const containerVariants: Variants = {
-  hidden: {},
+  hidden: { opacity: 0 },
   visible: {
+    opacity: 1,
     transition: { staggerChildren: 0.1 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -25,7 +25,7 @@ const lineVariants: Variants = {
   hidden: { scaleX: 0 },
   visible: {
     scaleX: 1,
-    transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -42,7 +42,7 @@ function SocialLink({ href, label }: SocialLinkProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative inline-block text-sm font-semibold uppercase tracking-widest text-zinc-500 transition-colors duration-300 hover:text-zinc-950"
+      className="group relative inline-block text-xs sm:text-sm font-semibold uppercase tracking-widest text-zinc-500 transition-colors duration-300 hover:text-zinc-950 py-1"
     >
       {label}
       {/* Russell Numo–style underline grow from left */}
@@ -54,20 +54,14 @@ function SocialLink({ href, label }: SocialLinkProps) {
 // ─── Main Contact Component ───────────────────────────────────────────────────
 
 export default function Contact() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  const footerRef = useRef(null);
-  const footerInView = useInView(footerRef, { once: true, margin: "-40px" });
-
   return (
-    <section id="contact" className="w-full bg-white">
+    <section id="contact" className="w-full bg-white overflow-hidden scroll-mt-20">
       {/* ── Top divider ── */}
       <motion.div
-        ref={ref}
         variants={lineVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        whileInView="visible"
+        viewport={{ once: true, margin: "200px" }}
         style={{ originX: 0 }}
         className="mx-auto max-w-7xl px-6 md:px-12"
       >
@@ -75,12 +69,13 @@ export default function Contact() {
       </motion.div>
 
       {/* ── Contact Body ── */}
-      <div className="mx-auto max-w-7xl px-6 md:px-12 py-24 md:py-36">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 py-16 sm:py-24 md:py-36">
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="flex flex-col gap-16"
+          whileInView="visible"
+          viewport={{ once: true, margin: "200px" }}
+          className="flex flex-col gap-10 sm:gap-16"
         >
           {/* Section label */}
           <motion.span
@@ -94,24 +89,24 @@ export default function Contact() {
           <div className="flex flex-col gap-0 overflow-hidden">
             <motion.h2
               variants={itemVariants}
-              className="text-6xl font-geist font-black uppercase tracking-tighter text-zinc-950 leading-[0.9] sm:text-7xl lg:text-8xl xl:text-9xl"
+              className="text-5xl xs:text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-geist font-black uppercase tracking-tighter text-zinc-950 leading-[0.9]"
             >
               Let&apos;s work
             </motion.h2>
             <motion.h2
               variants={itemVariants}
-              className="text-6xl font-geist font-black uppercase tracking-tighter text-zinc-950 leading-[0.9] sm:text-7xl lg:text-8xl xl:text-9xl"
+              className="text-5xl xs:text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-geist font-black uppercase tracking-tighter text-zinc-950 leading-[0.9]"
             >
               together.
             </motion.h2>
           </div>
 
           {/* ── Bottom row: description + email CTA ── */}
-          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-8 md:gap-10 md:flex-row md:items-end md:justify-between">
             {/* Left: short description */}
             <motion.p
               variants={itemVariants}
-              className="max-w-sm text-base leading-relaxed text-zinc-500 md:text-lg"
+              className="max-w-sm text-sm sm:text-base leading-relaxed text-zinc-500 md:text-lg"
             >
               Have a project in mind or just want to say hello? My inbox is
               always open — feel free to reach out.
@@ -120,13 +115,14 @@ export default function Contact() {
             {/* Right: email link — Russell Numo style large underline CTA */}
             <motion.a
               variants={itemVariants}
-              href="mailto:saddewaaa1509@email.com"
-              className="group relative inline-block text-2xl font-geist font-black uppercase tracking-tight text-zinc-950 sm:text-3xl lg:text-4xl"
+              href="mailto:saddewaaa1509@gmail.com"
+              className="group relative inline-block text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-geist font-black uppercase tracking-tight text-zinc-950 break-all sm:break-normal"
             >
-              saddewaaa1509@email.com
+              saddewaaa1509@gmail.com
               {/* animated underline */}
-              <span className="absolute left-0 bottom-0 h-[2px] w-full origin-left scale-x-100 bg-zinc-950 transition-transform duration-500 group-hover:scale-x-0" />
-              <span className="absolute left-0 bottom-0 h-[2px] w-full origin-right scale-x-0 bg-zinc-400 transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="hidden sm:block absolute left-0 bottom-0 h-[2px] w-full origin-left scale-x-100 bg-zinc-950 transition-transform duration-500 group-hover:scale-x-0" />
+              <span className="hidden sm:block absolute left-0 bottom-0 h-[2px] w-full origin-right scale-x-0 bg-zinc-400 transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="sm:hidden block h-[2px] w-full bg-zinc-950 mt-1" />
             </motion.a>
           </div>
         </motion.div>
@@ -134,10 +130,10 @@ export default function Contact() {
 
       {/* ── Divider ── */}
       <motion.div
-        ref={footerRef}
         variants={lineVariants}
         initial="hidden"
-        animate={footerInView ? "visible" : "hidden"}
+        whileInView="visible"
+        viewport={{ once: true, margin: "200px" }}
         style={{ originX: 0 }}
         className="mx-auto max-w-7xl px-6 md:px-12"
       >
@@ -145,17 +141,18 @@ export default function Contact() {
       </motion.div>
 
       {/* ── Footer / Bottom bar — mirrors Russell Numo's meta bottom bar ── */}
-      <footer className="mx-auto max-w-7xl px-6 md:px-12 py-6 md:py-8">
+      <footer className="mx-auto max-w-7xl px-6 md:px-12 py-8 md:py-10 pb-16 sm:pb-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={footerInView ? "visible" : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "200px" }}
           className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between"
         >
           {/* Left: Social links */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center gap-6"
+            className="flex flex-wrap items-center gap-4 sm:gap-6"
           >
             <SocialLink href="https://github.com/" label="GitHub" />
             <SocialLink href="https://linkedin.com/" label="LinkedIn" />

@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${outfit.variable} ${geistSans.variable} h-full antialiased`}
+      className={`${bebasNeue.variable} ${outfit.variable} ${geistSans.variable} scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-screen flex flex-col font-sans">
         <Header />
         {children}
       </body>

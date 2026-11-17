@@ -147,7 +147,7 @@ function ProjectCard({
 
 export default function Projects() {
   return (
-    <section id="projects" className="w-full bg-white py-24 sm:py-36 overflow-hidden">
+    <section id="projects" className="w-full bg-white py-24 sm:py-36 overflow-hidden scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         {/* Minimalist Brutal Header */}
         <div className="flex flex-col gap-4 mb-32">

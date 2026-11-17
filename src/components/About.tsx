@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -11,30 +10,27 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.7,
-      ease: "easeOut",
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 export default function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="about" className="w-full bg-white py-32 md:py-44">
+    <section id="about" className="w-full bg-white py-24 md:py-44 scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <motion.div
-          ref={ref}
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="flex flex-col gap-20"
+          whileInView="visible"
+          viewport={{ once: true, margin: "100px" }}
+          className="flex flex-col gap-16 md:gap-20"
         >
           {/* Header */}
           <div className="flex flex-col gap-8 max-w-2xl">
@@ -47,7 +43,7 @@ export default function About() {
 
             <motion.h2
               variants={itemVariants}
-              className="text-5xl font-geist font-black uppercase tracking-tighter text-zinc-950 sm:text-6xl lg:text-7xl leading-none"
+              className="text-4xl font-geist font-black uppercase tracking-tighter text-zinc-950 sm:text-6xl lg:text-7xl leading-none"
             >
               Crafting ideas into digital experiences.
             </motion.h2>
