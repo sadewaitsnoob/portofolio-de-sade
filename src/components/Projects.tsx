@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 interface ProjectItem {
@@ -9,33 +10,19 @@ interface ProjectItem {
   title: string;
   category: string;
   year: string;
-  placeholderColor: string;
+  image: string;
+  link: string;
 }
 
 const projectsData: ProjectItem[] = [
   {
-    id: "project-1",
+    id: "npc-quester",
     number: "01",
-    title: "E-Commerce",
-    category: "Fullstack Web Application",
+    title: "NPC Quester",
+    category: "Fullstack Add-On",
     year: "2025",
-    placeholderColor: "bg-zinc-900",
-  },
-  {
-    id: "project-2",
-    number: "02",
-    title: "SaaS Analytics",
-    category: "Product Design",
-    year: "2024",
-    placeholderColor: "bg-stone-900",
-  },
-  {
-    id: "project-3",
-    number: "03",
-    title: "Creative Agency",
-    category: "Interactive Experience",
-    year: "2024",
-    placeholderColor: "bg-neutral-900",
+    image: "/npc-quester.png",
+    link: "https://github.com/sadewaitsnoob/npc_quester",
   },
 ];
 
@@ -54,13 +41,10 @@ function ProjectCard({
     offset: ["start end", "end start"],
   });
 
-  // EXTREME Parallax values
-  // Gambar akan bergerak sangat jauh ke bawah/atas (dari -35% ke +35%)
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-35%", "35%"]);
-  // Teks judul akan bergerak berlawanan arah dengan ekstrem
-  const textY = useTransform(scrollYProgress, [0, 1], ["60%", "-60%"]);
-  // Nomor urut bergerak sedikit lebih lambat
-  const numberY = useTransform(scrollYProgress, [0, 1], ["30%", "-30%"]);
+  // Smooth Parallax values
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const numberY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"]);
 
   const isEven = index % 2 === 1;
 
@@ -69,7 +53,7 @@ function ProjectCard({
       ref={cardRef}
       className={`relative flex flex-col lg:items-center gap-12 lg:gap-24 ${
         isEven ? "lg:flex-row-reverse" : "lg:flex-row"
-      } lg:justify-between py-20 lg:py-40 min-h-[80vh] overflow-visible`}
+      } lg:justify-between py-16 lg:py-32 min-h-[70vh] overflow-visible`}
     >
       {/* Background Parallax Number */}
       <motion.div 
@@ -81,35 +65,38 @@ function ProjectCard({
         {project.number}
       </motion.div>
 
-      {/* Visual Container with Extreme Window Parallax */}
-      <div className="w-full lg:w-[55%] relative z-10">
-        <div className="group relative w-full aspect-[4/3] overflow-hidden bg-zinc-200">
-          {/* 
-            Container gambar dibuat sangat tinggi (170%) agar punya ruang 
-            untuk digeser -35% ke +35% tanpa terpotong ujungnya.
-          */}
-          <motion.div
-            style={{ y: imageY }}
-            className={`absolute top-[-35%] left-0 w-full h-[170%] flex items-center justify-center ${project.placeholderColor}`}
-          >
-            {/* Tekstur/Placeholder Minimalist Brutal */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:24px_24px] mix-blend-overlay" />
-            <div className="relative flex flex-col items-center justify-center opacity-30 text-white">
-              <span className="text-2xl font-geist font-light tracking-[0.5em] uppercase mb-4">
-                Preview
-              </span>
-              <span className="text-6xl font-geist font-black tracking-widest">
-                {project.id}
-              </span>
-            </div>
-          </motion.div>
+      {/* Visual Container with Interactive Thumbnail Link (Full 16:9, No Crop) */}
+      <motion.div 
+        style={{ y: imageY }}
+        className="w-full lg:w-[55%] relative z-10"
+      >
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block relative w-full overflow-hidden rounded-2xl bg-zinc-950 shadow-2xl border border-zinc-200/60 cursor-pointer"
+        >
+          {/* Full Image Preview - Exactly 2560x1440, No Crop */}
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={2560}
+            height={1440}
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+            priority
+          />
           
-          {/* Overlay Hover Effect */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-700 pointer-events-none" />
-        </div>
-      </div>
+          {/* Hover Overlay & Interactive Badge */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
+            <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/95 text-zinc-950 font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full shadow-2xl backdrop-blur-md transform translate-y-2 group-hover:translate-y-0">
+              View on GitHub ↗
+            </span>
+          </div>
+        </a>
+      </motion.div>
 
-      {/* Extreme Parallax Typography */}
+      {/* Parallax Typography */}
       <motion.div
         style={{ y: textY }}
         className="w-full lg:w-[40%] flex flex-col justify-center relative z-20 px-4 sm:px-0"
@@ -121,14 +108,21 @@ function ProjectCard({
             <span>{project.year}</span>
           </div>
 
-          <h3 className="text-5xl sm:text-6xl lg:text-7xl font-geist font-black uppercase tracking-tight text-zinc-950 leading-[0.9] hover:text-zinc-600 transition-colors duration-500 cursor-pointer">
-            {project.title}
+          <h3 className="text-4xl sm:text-6xl lg:text-7xl font-geist font-black uppercase tracking-tight text-zinc-950 leading-[0.9] hover:text-zinc-600 transition-colors duration-500">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {project.title}
+            </a>
           </h3>
 
-          <div className="mt-8">
+          <div className="mt-6">
             <a
-              href={`#${project.id}`}
-              onClick={(e) => e.preventDefault()}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-zinc-950"
             >
               <span className="border-b-2 border-transparent group-hover:border-zinc-950 transition-colors pb-1">
@@ -150,7 +144,7 @@ export default function Projects() {
     <section id="projects" className="w-full bg-white py-24 sm:py-36 overflow-hidden scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         {/* Minimalist Brutal Header */}
-        <div className="flex flex-col gap-4 mb-32">
+        <div className="flex flex-col gap-4 mb-20 lg:mb-32">
           <span className="text-sm font-semibold uppercase tracking-[0.3em] text-zinc-400">
             02 — Selected Works
           </span>
